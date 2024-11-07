@@ -1,0 +1,27 @@
+<!-- ecommerce/templates/ecommerce/product_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+</head>
+<body>
+    <h1>{% if category %}{{ category.name }}{% else %}All Products{% endif %}</h1>
+    <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'ecommerce:product_list_by_category' category.slug %}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for product in products %}
+            <li>
+                <a href="{% url 'ecommerce:product_detail' product.id %}">{{ product.name }}</a>
+                - ${{ product.price }}
+            </li>
+        {% empty %}
+            <li>No products found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
